@@ -11,5 +11,7 @@ const EnvSchema = z.object({
   GEMINI_MODEL: z.string().default("gemini-2.0-flash-lite"),
   GROQ_MODEL: z.string().default("llama-3.1-8b-instant"),
   SEARCH_PROVIDER: z.enum(["tavily"]).default("tavily"),
-  TAVITY_API_KEY: z.string().optional(),
+  TAVILY_API_KEY: z.string().optional(),
 });
+
+export const env = EnvSchema.parse(process.env);
