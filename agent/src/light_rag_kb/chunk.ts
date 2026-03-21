@@ -1,7 +1,5 @@
 // Import the Document class from LangChain core for creating document objects
 import { Document } from "@langchain/core/documents";
-// Import locale utility from Zod (note: this import appears unused in the current code)
-import { en } from "zod/locales";
 
 // Export constant for the maximum size of each text chunk in characters
 export const CHUNCK_SIZE = 1000;
