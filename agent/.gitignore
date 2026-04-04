@@ -1,6 +1,0 @@
-
-# Global ignore for all .env files
-.env
-.env.*
-*.env
-node_modules
