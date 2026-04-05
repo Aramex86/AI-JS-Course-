@@ -19,7 +19,7 @@ export const StateSchema = z.object({
   input: z.string().min(5, "Input must be at least 5 characters long"),
   steps: z.array(z.string()).optional(),
   approved: z.boolean().optional(),
-  rezults: z.array(StepResult).optional(),
+  results: z.array(StepResult).optional(),
   status: ExicutionStatus.optional(),
   stepResults: z.array(StepResult).optional(),
   message: z.string().optional(),

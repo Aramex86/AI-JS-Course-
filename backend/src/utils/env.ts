@@ -1,10 +1,10 @@
 import dotenv from "dotenv";
-dotenv.config();
 import { z } from "zod";
+dotenv.config();
 
 const envSchema = z.object({
-  GOOGLE_API_KEY: z.string().min(1, "GOOGLE_API_KEY is required"),
-  GEMINI_MODEL: z.string(),
+  OPENAI_API_KEY: z.string().min(1, "OPENAI_API_KEY is required"),
+  OPENAI_MODEL: z.string(),
   PORT: z.string().default("5174"),
 });
 
@@ -18,7 +18,7 @@ if (!parsed.success) {
 const raw = parsed.data;
 
 export const env = Object.freeze({
-  GOOGLE_API_KEY: raw.GOOGLE_API_KEY,
-  GEMINI_MODEL: raw.GEMINI_MODEL,
+  OPENAI_API_KEY: raw.OPENAI_API_KEY,
+  OPENAI_MODEL: raw.OPENAI_MODEL,
   PORT: raw.PORT,
 });

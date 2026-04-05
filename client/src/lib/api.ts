@@ -1,4 +1,4 @@
-const BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+const BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5174";
 
 export async function startAgent(input: string) {
   const res = await fetch(`${BASE}/agent`, {
