@@ -1,5 +1,11 @@
 import { Router } from "express";
 import { runProductAgent } from "../agent/03_agent";
+import {
+  appendToHistory,
+  ChatRole,
+  ensureThreadId,
+  getHistory,
+} from "../agent/04_memory";
 
 export const agentRouter = Router();
 
@@ -17,32 +23,33 @@ agentRouter.post("/chat", async (req, res) => {
       });
     }
 
-    // const threadId = await ensureThreadId(incomingThreadId);
+    const threadId = await ensureThreadId(incomingThreadId ?? "");
 
-    // const history = await getHistory(threadId);
+    const history = await getHistory(threadId);
 
     const usermsg = {
-      role: "user" as const,
+      role: "user" as ChatRole,
       content: message.trim(),
+      timestamp: new Date().toISOString(),
     };
 
-    // await appendToHistory(threadId, usermsg);
+    await appendToHistory(threadId, usermsg);
 
-    // const messagesForAgent = [...history, usermsg];
-    const messagesForAgent = [usermsg];
+    const messagesForAgent = [...history, usermsg];
 
     const { answer, citations } = await runProductAgent(messagesForAgent);
 
     const assistantmsg = {
-      role: "assistant" as const,
+      role: "assistant" as ChatRole,
       content: answer,
+      timestamp: new Date().toISOString(),
     };
 
-    // await appendToHistory(threadId, assistantmsg);
+    await appendToHistory(threadId, assistantmsg);
 
     return res.json({
       ok: true,
-      //   threadId,
+      threadId,
       answer,
       citations,
     });
